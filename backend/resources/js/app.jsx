@@ -1,5 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Login from './Login'; // Importer le composant Login
+import { createRoot } from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
 
-ReactDOM.render(<Login />, document.getElementById('app')); // Monter le composant dans #app
+
+createInertiaApp({
+    resolve: (name) => import(`./Pages/${name}.jsx`), 
+    setup({ el, App, props }) {
+        const root = createRoot(el);
+        root.render(<App {...props} />);
+    },
+});
+

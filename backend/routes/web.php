@@ -10,9 +10,7 @@ use App\Http\Controllers\QuizzController;
 use Illuminate\Support\Facades\Route;
 
 // 🌟 Page d'accueil principale
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // 🚪 Routes publiques
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -22,9 +20,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //test
+/*
 Route::get('/welcome', function () {
     return view('welcome');
-})->name('welcome');
+})->name('welcome');*/
 //test
 Route::get('/welcome', [EventController::class, 'show'])->name('welcome');
 

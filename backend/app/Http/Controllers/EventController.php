@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class EventController extends Controller
 {
@@ -85,7 +86,7 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'Événement supprimé avec succès.');
     }
 
-    public function show()
+    /*public function show()
     {
         // Récupérer l'événement "Masquerade Ball" de la base de données
         $event = Event::where('title', 'Soirée Masquerade Ball')->first();
@@ -97,5 +98,22 @@ class EventController extends Controller
 
         // Passer l'événement à la vue
         return view('welcome', compact('event'));
+    }*/
+    
+
+public function show()
+{
+    // Récupérer l'événement "Masquerade Ball" de la base de données
+    $event = Event::where('title', 'Soirée Masquerade Ball')->first();
+
+    // Vérifier si l'événement est trouvé
+    if (!$event) {
+        abort(404, 'Événement non trouvé');
     }
+
+    // Passer l'événement à la vue Inertia
+    return Inertia::render('Welcome', [
+        'event' => $event, // Passer les données de l'événement à React
+    ]);
+}
 }
